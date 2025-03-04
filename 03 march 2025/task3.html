@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label for="val1">Input1:</label>
+        <input type="text" id="val1" name="val1" value="" placeholder="enter input1">
+    </div>
+    <div>
+        <label for="val2">Input2:</label>
+        <input type="text" id="val2" name="val2" value="" placeholder="enter input1">
+    </div>
+    <div>
+        <label for="val3">Input1:</label>
+        <input type="text" id="val3" name="val3" value="" placeholder="enter input1">
+    </div>
+    <div>
+        <button onclick="getresult()">submit</button>
+    </div>
+
+    <h2 style="color:#05f505" id="result"></h2>
+    
+    <script>
+    function getresult(){
+        var val1 = document.getElementById('val1').value;
+        var val2 = document.getElementById('val2').value;
+        var val3 = document.getElementById('val3').value;
+        var result;
+        if(!isNaN(val1) && !isNaN(val2) && !isNaN(val3)){
+            result = parseFloat(val1) + parseFloat(val2) + parseFloat(val3);
+        }else
+        {
+            result = val1 +""+ val2 + val3;
+        }
+        document.getElementById("result").innerHTML = result;
+    }
+    </script>
+
+</body>
+</html>

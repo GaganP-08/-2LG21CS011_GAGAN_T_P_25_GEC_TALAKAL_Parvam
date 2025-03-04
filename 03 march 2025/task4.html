@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Example 4</title>
+   
+</head>
+<body>
+
+    <h1>JS Example 4</h1>
+    <div>
+        <label for="txt1">value 1</label>
+        <input type="text" id="val1" placeholder="Enter first value">
+    </div>
+    <div>
+        <label for="txt1">value 2</label>
+        <input type="text" id="val2" placeholder="Enter second value">
+    </div>
+    <div>
+        <label for="txt1">value 3</label>
+        <input type="text" id="val3" placeholder="Enter third value">
+    </div>
+    <br>
+    <div><button onclick="getresult()">Calculate</button></div>
+    <h2 style="color:red" id="result"></h2>
+
+    <script>
+        function getresult() {
+             val1 = document.getElementById("val1").value;
+             val2 = document.getElementById("val2").value;
+             val3 = document.getElementById("val3").value;
+             resultDiv = document.getElementById("result");
+
+
+            if (!isNaN(val1) && !isNaN(val2) && !isNaN(val3)) {
+                
+                 addition = parseFloat(val1) + parseFloat(val2) + parseFloat(val3);
+                 subtraction = parseFloat(val1) - parseFloat(val2) - parseFloat(val3);
+                 multiplication = parseFloat(val1) * parseFloat(val2) * parseFloat(val3);
+                 division = parseFloat(val1) / parseFloat(val2) / parseFloat(val3);
+                 modulus = parseFloat(val1) % parseFloat(val2) % parseFloat(val3);
+                resultDiv.innerHTML = `
+                    <p>Addition: ${addition}</p>
+                    <p>Subtraction: ${subtraction}</p>
+                    <p>Multiplication: ${multiplication}</p>
+                    <p>Division: ${division}</p>
+                    <p>modulus: ${modulus}</p>
+                `;
+            } else {
+            
+                normalConcat = val1 + val2 + val3;
+                let reverseConcat = val3 + val2 + val1;
+
+                resultDiv.innerHTML = `
+                    <p>Concatenation: ${normalConcat}</p>
+                    <p>Reverse Concatenation: ${reverseConcat}</p>
+                `;
+            }
+        }
+    </script>
+
+</body>
+</html>

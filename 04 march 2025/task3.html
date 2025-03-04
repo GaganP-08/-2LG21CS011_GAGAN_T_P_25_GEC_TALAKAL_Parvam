@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+            border:1px solid black;
+            border-collapse: collapse;
+        }
+        tr{
+            text-align: center;
+        }
+        </style>
+</head>
+
+
+<body>
+        <div>
+            <label for="txt1">value 1</label>
+            <input type="text" id="val1" name="val1" value="" placeholder="Enter value 1">
+        </div>
+        <div>
+            <label for="txt2">value 2</label>
+            <input type="text" id="val2"  name="val2" value="" placeholder="Enter value 2">
+        </div>
+        <div><button onclick="getResult()">Submit</button></div>
+        <br>
+
+        <div id="fnlname"></div>
+
+
+
+        <script>
+            function getResult(){
+                var val1 =document.getElementById('val1').value;
+                var val2 =document.getElementById('val2').value;
+                
+                var result;
+
+                if(!isNaN(val1) && !isNaN(val2) && val1 !== "" && val2 !== ""){
+                    let resulta = parseFloat(val1) + parseFloat(val2) ;
+                    let results = parseFloat(val1) - parseFloat(val2) ;
+                    let resultm = parseFloat(val1) * parseFloat(val2) ;
+                    let resultd = parseFloat(val1) / parseFloat(val2) ;
+                    let resultmod = parseFloat(val1) % parseFloat(val2) ;
+                    let resultinc= parseFloat(val1) ;
+                    let resultdec= parseFloat(val1) ;
+                   let resultexe= parseFloat(val1) ** parseFloat(val2) ; 
+                    resultinc++;
+                    resultdec--;
+                    result=`<table style="width:100%">
+                        <tr>
+                            <th>x</th>
+                            <th>y</th> 
+                            <th>op</th>
+                            <th>exp</th>
+                            <th style="width:50%" colspan="2">Result</th>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td>${val1}</td> 
+                            <td>${val2}</td>
+                            <td>+</td>
+                            <td>${val1}+${val2}</td>
+                            <td>${resulta}</td>
+                            </tr>
+                        <tr style="height:40px;" >
+                            <td>${val1}</td>
+                            <td>${val2}</td>
+                            <td>-</td>
+                            <td>${val1}-${val2}</td>
+                            <td>${results}</td>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td>${val1}</td>
+                            <td>${val2}</td>
+                            <td>*</td>
+                            <td>${val1}*${val2}</td>
+                            <td>${results}</td>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td>${val1}</td>
+                            <td>${val2}</td>
+                            <td>/</td>
+                            <td>${val1}/${val2}</td>
+                            <td>${resultd}</td>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td>${val1}</td>
+                            <td>${val2}</td>
+                            <td>%</td>
+                            <td>${val1}%${val2}</td>
+                            <td>${resultmod}</td>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td>${val1}</td>
+                            <td>${val2}</td>
+                            <td>++</td>
+                            <td>${val1}++</td>
+                            <td>${resultinc}</td>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td>${val1}</td>
+                            <td>${val2}</td>
+                            <td>--</td>
+                            <td>${val2}--</td>
+                            <td>${resultdec}</td>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td>${val1}</td>
+                            <td>${val2}</td>
+                            <td>**</td>
+                            <td>${val1}${val2}</td>
+                            <td>${resultexe}</td>
+                        </tr>
+                    </table>`
+
+                }else{
+
+                    let resultcancat =val1 +val2 ;
+
+                    let cancatArray = resultcancat.split('');
+                    let reverseArray = cancatArray.reverse();
+                    let reversestring =reverseArray.join('');
+                    result=`
+                    <table style="width:100%">
+        
+                        <h2>Cancatenation of strings</h2>
+                    <tr>
+                        <th>x</th>
+                        <th>y</th> 
+                        <th>cancat</th>
+                        <th>length</th>
+                        <th>reverse</th> 
+                    </tr>
+                    <tr>
+                        <td>${val1}</td>
+                        <td>${val2}</td>
+                        <td>${resultcancat}</td>
+                        <td>${resultcancat.length}</td>
+                        <td>${reversestring}</td>
+                    </tr>
+                    
+                    </table>`
+                    
+                }
+                document.getElementById('fnlname').innerHTML = result;
+            }
+        </script>
+</body>
+</html>
