@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Shapes with Radius/Dimensions</title>
+    <style>
+        #my-shape {
+            background-color: lightblue;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="shape-form">
+        <label for="shape-select">Select Shape:</label>
+        <select id="shape-select">
+            <option value="square">Square</option>
+            <option value="rectangle">Rectangle</option>
+            <option value="circle">Circle</option>
+            <option value="ellipse">Ellipse</option>
+        </select><br><br>
+
+        <div id="width-height-inputs">
+            <label for="width-input">Width:</label>
+            <input type="number" id="width-input" value="100"><br><br>
+
+            <label for="height-input">Height:</label>
+            <input type="number" id="height-input" value="100"><br><br>
+        </div>
+
+        <div id="radius-input" style="display: none;">
+            <label for="radius-input-field">Radius:</label>
+            <input type="number" id="radius-input-field" value="50"><br><br>
+        </div>
+
+        <button type="button" id="draw-button">Draw Shape</button>
+    </form>
+
+    <div id="my-shape"></div>
+
+    <script>
+        const shapeSelect = document.getElementById('shape-select');
+        const widthInput = document.getElementById('width-input');
+        const heightInput = document.getElementById('height-input');
+        const radiusInput = document.getElementById('radius-input');
+        const radiusInputField = document.getElementById('radius-input-field');
+        const drawButton = document.getElementById('draw-button');
+        const myShape = document.getElementById('my-shape');
+        const widthHeightInputs = document.getElementById('width-height-inputs');
+
+        shapeSelect.addEventListener('change', function() {
+            if (this.value === 'circle') {
+                widthHeightInputs.style.display = 'none';
+                radiusInput.style.display = 'block';
+            } else {
+                widthHeightInputs.style.display = 'block';
+                radiusInput.style.display = 'none';
+            }
+        });
+
+        drawButton.addEventListener('click', function() {
+            const shape = shapeSelect.value;
+            let width, height;
+
+            if (shape === 'circle') {
+                const radius = radiusInputField.value + 'px';
+                width = radius * 2;
+                height = radius * 2;
+                myShape.style.width = width + 'px';
+                myShape.style.height = height + 'px';
+                myShape.style.borderRadius = '50%';
+            } else {
+                width = widthInput.value + 'px';
+                height = heightInput.value + 'px';
+                myShape.style.width = width;
+                myShape.style.height = height;
+                if (shape === 'square') {
+                    myShape.style.borderRadius = '0';
+                } else if (shape === 'rectangle'){
+                    myShape.style.borderRadius = '0';
+                } else if (shape === 'ellipse'){
+                    myShape.style.borderRadius = '50%'/'25%';
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
