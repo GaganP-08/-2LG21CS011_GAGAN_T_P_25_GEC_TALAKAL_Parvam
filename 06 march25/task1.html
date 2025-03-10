@@ -1,128 +1,235 @@
-<html><head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shape Drawer</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+		#input-container {
+			margin-top: 20px;
+		}
+		#canvas-container {
+			margin-top: 20px;
+			border: 1px solid #ccc;
+		}
+		#canvas {
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<h1>Shape Drawer</h1>
+	<select id="shape-select">
+		<option value="">Select a shape</option>
+		<option value="rectangle">Rectangle</option>
+		<option value="circle">Circle</option>
+		<option value="triangle">Triangle</option>
+	</select>
+	<div id="input-container"></div>
+	<div id="canvas-container">
+		<canvas id="canvas" width="400" height="400"></canvas>
+	</div>
+	<button id="draw-button">Draw</button>
+
+	<script>
+		const shapeSelect = document.getElementById('shape-select');
+		const inputContainer = document.getElementById('input-container');
+		const canvas = document.getElementById('canvas');
+		const ctx = canvas.getContext('2d');
+		const drawButton = document.getElementById('draw-button');
+
+		shapeSelect.addEventListener('change', (e) => {
+			const selectedShape = e.target.value;
+			inputContainer.innerHTML = '';
+
+			switch (selectedShape) {
+				case 'rectangle':
+					addInputFields('Width', 'Height');
+					break;
+				case 'circle':
+					addInputFields('Radius');
+					break;
+				case 'triangle':
+					addInputFields('Base', 'Height');
+					break;
+				default:
+					break;
+			}
+		});
+
+		drawButton.addEventListener('click', () => {
+			const selectedShape = shapeSelect.value;
+			const inputFields = inputContainer.children;
+
+			switch (selectedShape) {<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shape Selection and Display</title>
     <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      font: 400 15px/1.8 "Lato", sans-serif;
-      color: #777;
-    }
-    
-    .bgimg-1, .bgimg-2, .bgimg-3 {
-      position: relative;
-      opacity: 0.65;
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    
-    }
-    .bgimg-1 {
-      background-image: url("img1.jpeg");
-      min-height: 100%;
-    }
-    
-    .bgimg-2 {
-      background-image: url("img2.jpeg");
-      min-height: 400px;
-    }
-    
-    .bgimg-3 {
-      background-image: url("img5.jpeg");
-      min-height: 400px;
-    }
+        #shapeInputs {
+            display: none;
+        }
 
-    .bgimg-4 {
-      background-image: url("img4.jpeg");
-      min-height: 400px;
-    }
-    
-    .caption {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 100%;
-      text-align: center;
-      color: #000;
-    }
-    
-    .caption span.border {
-      background-color: #111;
-      color: #fff;
-      padding: 18px;
-      font-size: 25px;
-      letter-spacing: 10px;
-    }
-    
-    h3 {
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      font: 20px "Lato", sans-serif;
-      color: #111;
-    }
-    
-    /* Turn off parallax scrolling for tablets and phones */
-    @media only screen and (max-device-width: 1024px) {
-      .bgimg-1, .bgimg-2, .bgimg-3 {
-        background-attachment: scroll;
-      }
-    }
+        .dimension-input {
+            display: none;
+        }
+
+            
     </style>
-    </head>
-    <body>
-    
-    <div class="bgimg-1">
-      <div class="caption">
-      <span class="border">SCROLL DOWN</span>
-      </div>
-    </div>
-    
-    <div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
-      <h3 style="text-align:center;">Parallax Demo</h3>
-      <p>Parallax scrolling is a web site trend where the background content is moved at a different speed than the foreground content while scrolling. Nascetur per nec posuere turpis, lectus nec libero turpis nunc at, sed posuere mollis ullamcorper libero ante lectus, blandit pellentesque a, magna turpis est sapien duis blandit dignissim. Viverra interdum mi magna mi, morbi sociis. Condimentum dui ipsum consequat morbi, curabitur aliquam pede, nullam vitae eu placerat eget et vehicula. Varius quisque non molestie dolor, nunc nisl dapibus vestibulum at, sodales tincidunt mauris ullamcorper, dapibus pulvinar, in in neque risus odio. Accumsan fringilla vulputate at quibusdam sociis eleifend, aenean maecenas vulputate, non id vehicula lorem mattis, ratione interdum sociis ornare. Suscipit proin magna cras vel, non sit platea sit, maecenas ante augue etiam maecenas, porta porttitor placerat leo.</p>
-    </div>
-    
-    <div class="bgimg-2">
-      <div class="caption">
-      <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">LESS HEIGHT</span>
-      </div>
-    </div>
-    
-    <div style="position:relative;">
-      <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-      <p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>
-      </div>
-    </div>
-    
-    <div class="bgimg-3">
-      <div class="caption">
-      <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">SCROLL UP</span>
-      </div>
-    </div>
-    
-    <div style="position:relative;">
-      <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-      <p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>
-      </div>
+</head>
 
-      <div class="bgimg-3">
-        <div class="caption">
-        <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">SCROLL UP</span>
+<body>
+
+    <h2>Select a Shape</h2>
+
+    <select id="shapeSelect">
+        <option value="">Select a shape</option>
+        <option value="circle">Circle</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="square">Square</option>
+        <option value="triangle">Triangle</option>
+    </select>
+
+    <div id="shapeInputs">
+        <div id="rectangleInputs" class="dimension-input">
+            <label for="rectangleWidth">Width:</label>
+            <input type="number" id="rectangleWidth"><br>
+            <label for="rectangleHeight">Height:</label>
+            <input type="number" id="rectangleHeight"><br>
+        </div>
+
+        <div id="squareInputs" class="dimension-input">
+            <label for="squareSide">Side:</label>
+            <input type="number" id="squareSide"><br>
+        </div>
+
+        <div id="triangleInputs" class="dimension-input">
+            <label for="triangleBase">Base:</label>
+            <input type="number" id="triangleBase"><br>
+            <label for="triangleHeight">Height:</label>
+            <input type="number" id="triangleHeight"><br>
+        </div>
+
+        <div id="circleInputs" class="dimension-input">
+            <label for="circleRadius">Radius:</label>
+            <input type="number" id="circleRadius"><br>
         </div>
     </div>
-      
-    <div style="position:relative;">
-        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-        <p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>
-        </div>
+
+    <button id="drawButton" style="display: none;">Draw Shape</button>
+
+    <div id="shapeDisplay">
+        <canvas id="myCanvas" width="300" height="200"></canvas>
     </div>
-    </div>
-    
-    <div class="bgimg-1">
-      <div class="caption">
-      <span class="border">COOL!</span>
-      </div>
-    </div>
-    
-    
-    </body></html>
+
+    <script>
+        const shapeSelect = document.getElementById('shapeSelect');
+        const shapeInputs = document.getElementById('shapeInputs');
+        const rectangleInputs = document.getElementById('rectangleInputs');
+        const squareInputs = document.getElementById('squareInputs');
+        const triangleInputs = document.getElementById('triangleInputs');
+        const circleInputs = document.getElementById('circleInputs');
+        const drawButton = document.getElementById('drawButton');
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        shapeSelect.addEventListener('change', function () {
+            const selectedShape = shapeSelect.value;
+            shapeInputs.style.display = selectedShape ? 'block' : 'none';
+            drawButton.style.display = selectedShape ? 'block' : 'none';
+
+            rectangleInputs.style.display = selectedShape === 'rectangle' ? 'block' : 'none';
+            squareInputs.style.display = selectedShape === 'square' ? 'block' : 'none';
+            triangleInputs.style.display = selectedShape === 'triangle' ? 'block' : 'none';
+            circleInputs.style.display = selectedShape === 'circle' ? 'block' : 'none';
+        });
+
+        drawButton.addEventListener('click', function () {
+            const selectedShape = shapeSelect.value;
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous drawing
+
+            if (selectedShape === 'rectangle') {
+                const width = parseInt(document.getElementById('rectangleWidth').value);
+                const height = parseInt(document.getElementById('rectangleHeight').value);
+                ctx.fillRect(50, 50, width, height);
+            } else if (selectedShape === 'square') {
+                const side = parseInt(document.getElementById('squareSide').value);
+                ctx.fillRect(50, 50, side, side);
+            } else if (selectedShape === 'triangle') {
+                const base = parseInt(document.getElementById('triangleBase').value);
+                const height = parseInt(document.getElementById('triangleHeight').value);
+                ctx.beginPath();
+                ctx.moveTo(50, 50 + height);
+                ctx.lineTo(50 + base, 50 + height);
+                ctx.lineTo(50 + (base / 2), 50);
+                ctx.closePath();
+                ctx.fill();
+            } else if (selectedShape === 'circle') {
+                const radius = parseInt(document.getElementById('circleRadius').value);
+                ctx.beginPath();
+                ctx.arc(150, 100, radius, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+				case 'rectangle':
+					const width = parseFloat(inputFields[0].value);
+					const height = parseFloat(inputFields[1].value);
+					drawRectangle(width, height);
+					break;
+				case 'circle':
+					const radius = parseFloat(inputFields[0].value);
+					drawCircle(radius);
+					break;
+				case 'triangle':
+					const base = parseFloat(inputFields[0].value);
+					const height1 = parseFloat(inputFields[1].value);
+					drawTriangle(base, height);
+					break;
+				default:
+					break;
+			}
+		});
+
+		function addInputFields(...labels) {
+			labels.forEach((label) => {
+				const inputField = document.createElement('input');
+				const labelElement = document.createElement('label');
+				labelElement.textContent = label;
+				inputContainer.appendChild(labelElement);
+				inputContainer.appendChild(inputField);
+			});
+		}
+
+		function drawRectangle(width, height) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.beginPath();
+			ctx.rect(100, 100, width, height);
+			ctx.stroke();
+		}
+
+		function drawCircle(radius) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.beginPath();
+			ctx.arc(200, 200, radius, 0, 2 * Math.PI);
+			ctx.stroke();
+		}
+
+		function drawTriangle(base, height) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.beginPath();
+			ctx.moveTo(150, 200);
+			ctx.lineTo(250, 200);
+			ctx.lineTo(200, 100);
+			ctx.closePath();
+			ctx.stroke();
+		}
+	</script>
+</body>
+</html>
