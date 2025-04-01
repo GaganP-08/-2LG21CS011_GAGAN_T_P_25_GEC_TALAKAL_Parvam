@@ -9,8 +9,6 @@ import com.example.studentcrud.model.Staff;
 import com.example.studentcrud.repository.StaffRepository;
 
 @Service
-
-
 public class StaffService {
 
     @Autowired
@@ -31,7 +29,4 @@ public class StaffService {
     public void deleteStaff(Long id) {
         staffRepository.deleteById(id);
     }
-
-    
-    
 }

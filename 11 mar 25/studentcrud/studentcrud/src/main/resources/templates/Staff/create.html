@@ -8,75 +8,45 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url('/upload/image22.png');
+            background-image: url('/images/image99.png');
             background-repeat: no-repeat;
             background-size: 100% 100%
         }
-
-       
     </style>
 </head>
 
 <body>
     <div th:replace="fragments/nav :: nav"></div>
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
         <div class="w-50">
-            <h1 class="mt-5 text-center">Create Staff</h1>
-            <form th:action="@{/staff/save}" th:object="${staff}" method="post" class="mt-3" enctype="multipart/form-data">
+            <h1 class="mt-5 text-center"><b>Create Staff</b></h1>
+            <form th:action="@{/ganga/save}" th:object="${staff}" method="post" class="mt-3"
+                enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="StaffName">Name:</label>
-                    <input type="text" class="form-control" id="StaffName" th:field="*{name}"
-                        placeholder="Enter Staff name">
+                    <label for="staffName" style="color:white" ;>Name:</label>
+                    <input type="text" class="form-control" id="staffName" th:field="*{name}"
+                        placeholder="Enter staff name">
                 </div>
                 <div class="form-group">
-                    <label for="StaffEmail">Email:</label>
-                    <input type="email" class="form-control" id="StaffEmail" th:field="*{email}"
-                        placeholder="Enter Staff email">
+                    <label for="staffEmail" style="color:white" ;>Email:</label>
+                    <input type="email" class="form-control" id="staffEmail" th:field="*{email}"
+                        placeholder="Enter staff email">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone:</label>
-                    <input type="number" class="form-control" id="StaffPhone" th:field="*{phone}"
-                        placeholder="Enter Staff Phone">
+                    <label for="phone" style="color:white" ;>Phone:</label>
+                    <input type="number" class="form-control" id="staffPhone" th:field="*{phone}"
+                        placeholder="Enter staff Phone">
                 </div>
-                <div>
-                    <label for="dob">Date of Birth:</label>
-                    <input type="date" class="form-control" id="studentDob" th:field="*{dob}"
-                        placeholder="Enter student Dob">
-                </div><br>
                 <div class="form-group">
-                    <label for="adress">Adress:</label>
-                    <input type="text" class="form-control" id="Staffadress" th:field="*{adress}"
-                        placeholder="Enter Staff adress">
+                    <label for="profilepic" style="color:white" ;>Profilepic:</label>
+                    <input type="file" class="form-control" id="staffProfilepic" th:field="*{profilepic}"
+                        placeholder="Enter staff Profilepic">
                 </div>
 
-
-                <div class="form-group">
-                    <label for="education">Education</label><br>
-                    <input type="checkbox" id="puc" th:field="*{education}" name="education" value="puc">
-                    <label for="puc">PUC</label> <br>
-                    <input type="checkbox" id="degree" th:field="*{education}" name="education" value="degree">
-                    <label for="degree">Degree</label><br>
-                    <input type="checkbox" id="postdegree" th:field="*{education}" name="education" value="postdegree">
-                    <label for="postdegree">PostDegree</label>
-
-                </div>
-
-                <div class="form-group">
-                    <label for="gender">Gender:</label><br>
-                    <select name="gender" id="gender" th:field="*{gender}">
-                        <option value=""></option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select><br>
-                </div>
-                <div class="form-group">
-                    <label for="profilepic">profilepic</label>
-                    <input type="file" class="form-control" id="staffProfilepic" th:field="*{profilepic}" placeholder="Enter staff profilepic">
-                </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
         </div>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +17,7 @@ import com.example.studentcrud.model.Staff;
 import com.example.studentcrud.service.StaffService;
 
 @Controller
-@RequestMapping("/staff")
-
+@RequestMapping("ganga")
 public class StaffController {
 
     @Autowired
@@ -39,46 +37,60 @@ public class StaffController {
 
     @PostMapping("/save")
     public String saveStaff(
-    @RequestParam("name") String name,
-    @RequestParam("email") String email,
-    @RequestParam("phone") String phone,@RequestParam("profilepic") MultipartFile profilePic) {
+            @RequestParam("name") String name,
+            @RequestParam("email") String email,
+            @RequestParam("phone") String phone, @RequestParam("profilepic") MultipartFile profilePic) {
         String uploadDir = new File("src/main/resources/static/upload/").getAbsolutePath();
         try {
-        String fileName = profilePic.getOriginalFilename();
-        String filePath = uploadDir + File.separator + fileName;
-        profilePic.transferTo(new File(filePath));
-
-        
-        Staff stf = new Staff();
-        stf.setName(name);
-        stf.setEmail(email);
-        stf.setPhone(phone);
-        stf.setProfilepic("/upload/" + fileName);
-        staffService.saveStaff(stf);
-    } catch (IOException e) {
+            String fileName = profilePic.getOriginalFilename();
+            String filePath = uploadDir + File.separator + fileName;
+            profilePic.transferTo(new File(filePath));
+            Staff stu = new Staff();
+            stu.setname(name);
+            stu.setEmail(email);
+            stu.setPhone(phone);
+            stu.setProfilepic("/upload/" + fileName);
+            staffService.saveStaff(stu);
+        } catch (IOException e) {
+        }
+        return "redirect:/ganga/list";
     }
-        return "redirect:/staff/list";
-    }
-
-  
 
     @GetMapping("/delete/{id}")
     public String deleteStaff(@PathVariable Long id) {
         staffService.deleteStaff(id);
-        return "redirect:/staff/list";
+        return "redirect:/ganga/list";
+
     }
-    
+
     @GetMapping("/edit/{id}")
-    public String editStaff(@PathVariable Long id,Model model) {
+    public String editStaff(@PathVariable Long id, Model model) {
         model.addAttribute("staff", staffService.getStaff(id));
         return "staff/edit";
+
     }
 
     @PostMapping("/update/{id}")
-    public String  saveStaff(@PathVariable Long id,@ModelAttribute Staff stf) {
-        stf.setId(id);
-        staffService.saveStaff(stf);
-        return "redirect:/staff/list";
+    public String saveStaff(@PathVariable Long id,
+
+            @RequestParam("name") String name,
+            @RequestParam("email") String email,
+            @RequestParam("phone") String phone, @RequestParam("profilepic") MultipartFile profilepic) {
+        String uploadDir = new File("src/main/resources/static/upload/").getAbsolutePath();
+        try {
+            String fileName = profilepic.getOriginalFilename();
+            String filePath = uploadDir + File.separator + fileName;
+            profilepic.transferTo(new File(filePath));
+            Staff stu = new Staff();
+            stu.setProfilepic("/upload/" + fileName);
+            stu.setId(id);
+            stu.setname(name);
+            stu.setEmail(email);
+            stu.setPhone(phone);
+            stu.setProfilepic("/upload/" + fileName);
+            staffService.saveStaff(stu);
+        } catch (IOException e) {
+        }
+        return "redirect:/ganga/list";
     }
-    
 }

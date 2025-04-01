@@ -10,56 +10,43 @@
   body {
 
     background-color: lightblue;
-    background-size: 100% 100%
 }
 </style>
 </head>
 <body>
-    <div th:replace="fragments/nav :: nav"></div>
-
+<div th:replace="fragments/nav :: nav"></div>
 <div class="container mt-3">
     <h2>Staff List</h2>
-    <a th:href ="@{/users/create}" class = "btn btn-warning">Add Student</a>
-    <a th:href ="@{/gagan/create}" class = "btn btn-warning">Add Employee</a>
-    <a th:href ="@{/staff/create}" class = "btn btn-warning">Add Staff</a>
+    <a th:href="@{/savithra/create}" class="btn btn-warning m-3">Add Employee</a>
+    <a th:href="@{/users/create}" class="btn btn-warning m-3">Add Student</a>
+    <a th:href="@{/ganga/create}" class="btn btn-warning m-3">Add Staff</a>
     <table class="table table-success table-striped">
     <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>phone</th>
-            <th>dob</th>
-            <th>Adress</th>
-            <th>Education</th>
-            <th>Gender</th>
-            <th>profilepic</th>
-            <th>Action</th>
-
-        </tr>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>phone</th>
+        <th>profilepic</th>
+        <th>action</th>
+      </tr>
     </thead>
     <tbody>
-        <tr th:each="stf: ${staff}">
-            <td  th:text="${stf.id}"></td>
-            <td  th:text="${stf.name}"></td>
-            <td  th:text="${stf.email}"></td>
-            <td  th:text="${stf.phone}"></td>
-            <td  th:text="${stf.dob}"></td>
-            <td  th:text="${stf.adress}"></td>
-            <td  th:text="${stf.education}"></td>
-            <td  th:text="${stf.gender}"></td>
-            <td> <img th:src="${ stf.profilepic != null ? stf.profilepic : '/upload/images.png'  }" th:alt="${stf.profilepic}" height="50px"width="60px"/></td>
-        
-        
-            <td>
-                <a th:href="@{/staff/edit/{id}(id=${stf.id})}" class="btn btn-primary">Edit</a>
-                <a th:href="@{/staff/delete/{id}(id=${stf.id})}" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
+      <tr th:each="stu: ${staff}">
+        <td  th:text="${stu.id}"></td>
+        <td  th:text="${stu.name}"></td>
+        <td  th:text="${stu.email}"></td>
+        <td  th:text="${stu.phone}"></td>
+        <td><img th:src="${stu.profilepic != null and not #strings.isEmpty(stu.profilepic) ? stu.profilepic : '/upload/defaultimage.jpg'}" th:alt="${stu.name}" height="50px" width="60px"/></td>
 
-        
+        <td>
+            
+          <a th:href="@{/ganga/edit/{id}(id=${stu.id})}" class="btn btn-primary">Edit</a>
+          <a th:href="@{/ganga/delete/{id}(id=${stu.id})}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
     </tbody>
-    </table>
+  </table>
 </div>
 
 </body>

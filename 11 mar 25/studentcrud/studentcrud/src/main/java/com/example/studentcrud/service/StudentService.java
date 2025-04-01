@@ -12,7 +12,7 @@ import com.example.studentcrud.repository.StudentRepository;
 public class StudentService {
 
     @Autowired
-    private  StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
     public List<Student> listAll() {
         return studentRepository.findAll();
